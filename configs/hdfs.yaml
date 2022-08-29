@@ -1,0 +1,18 @@
+# pytorch_lightning==1.7.0
+model:
+  dims: 32
+  lr: 0.001
+  mn: 1
+  ma: 5
+  loss_type: logloss
+data:
+  batch_size: 256
+  train_dataset_names:
+    - hdfs
+  test_dataset_names:
+    - hdfs
+  train_validation_proportions:
+  - 0.8
+  - 0.2
+  noise_ratio: 0.0
+  aot_ratio: 0.0

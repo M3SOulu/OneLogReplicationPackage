@@ -1,0 +1,22 @@
+# pytorch_lightning==1.7.0
+model:
+  dims: 16
+  lr: 0.002
+  mn: 1
+  ma: 15
+  loss_type: logloss
+data:
+  batch_size: 512
+  train_dataset_names:
+    - bgl
+  test_dataset_names:
+    - bgl
+  train_validation_proportions:
+    - 0.8
+    - 0.2
+  min_shape:
+    - 6
+    - 15
+  noise_ratio: 0.0
+  aot_ratio: 0.0
+ckpt_path: null

@@ -1,0 +1,29 @@
+# pytorch_lightning==1.7.0
+model:
+  dims: 64
+  lr: 0.001
+  mn: 1
+  ma: 15
+  loss_type: logloss
+data:
+  batch_size: 32
+  train_dataset_names:
+    - hdfs
+    - bgl
+    - hadoop
+    - thunderbird
+    - spirit
+    - liberty
+  test_dataset_names:
+    - hdfs
+    - bgl
+    - hadoop
+    - thunderbird
+    - spirit
+    - liberty
+  train_validation_proportions:
+  - 0.8
+  - 0.2
+  noise_ratio: 0.0
+  aot_ratio: 0.0
+ckpt_path: null

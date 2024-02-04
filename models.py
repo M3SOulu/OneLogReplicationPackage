@@ -8,7 +8,9 @@ import torch.nn.functional as F
 from torchmetrics import MeanMetric
 from tqdm import tqdm
 
-from torchmetrics.classification import F1Score, Precision, Recall
+from torchmetrics.classification import BinaryF1Score as F1Score
+from torchmetrics.classification import BinaryPrecision as Precision
+from torchmetrics.classification import BinaryRecall as Recall
 from losses import MarginLoss, F1ScoreWithEmbeddings, PrecisionWithEmbeddings, RecallWithEmbeddings
 
 
@@ -29,13 +31,13 @@ class BaseModel(pl.LightningModule):
             self.criterion = MarginLoss(mn, ma)
         elif loss_type == 'logloss':
             self.testset_count = testset_count
-            self.train_f1 = F1Score(threshold=0)
+            self.train_f1 = F1Score()
             self.val_loss = MeanMetric()
-            self.val_f1 = F1Score(threshold=0)
+            self.val_f1 = F1Score()
             for i in range(testset_count):
-                setattr(self, f'test_precision_{i}', Precision(threshold=0))
-                setattr(self, f'test_recall_{i}', Recall(threshold=0))
-                setattr(self, f'test_f1_{i}', F1Score(threshold=0))
+                setattr(self, f'test_precision_{i}', Precision())
+                setattr(self, f'test_recall_{i}', Recall())
+                setattr(self, f'test_f1_{i}', F1Score())
             self.criterion = nn.BCEWithLogitsLoss(torch.tensor([positive_class_weight]))
         self.lr = lr
 
@@ -47,7 +49,7 @@ class BaseModel(pl.LightningModule):
         self.log("f1", self.train_f1.compute(), prog_bar=True, batch_size=x.shape[0], sync_dist=True)
         return loss
 
-    def training_epoch_end(self, outputs) -> None:
+    def on_train_epoch_end(self, outputs) -> None:
         self.log("training_epoch_f1", self.train_f1.compute(), sync_dist=True)
 
     def validation_step(self, batch, batch_idx, dataloader_idx):
@@ -71,7 +73,7 @@ class BaseModel(pl.LightningModule):
                 f"test_f1_{self.trainer.datamodule.datasets_test[dataloader_idx - 1].name}": f1.compute()
             }
 
-    def validation_epoch_end(self, outputs) -> None:
+    def on_validation_epoch_end(self, outputs) -> None:
         self.log("val_f1", self.val_f1.compute(), prog_bar=True, sync_dist=True)
         for i in range(self.testset_count):
             p = getattr(self, f'test_precision_{i}')

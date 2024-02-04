@@ -10,8 +10,20 @@ Our findings reveal that **OneLog** not only achieves state-of-the-art performan
 
 We conclude that character-based CNNs represent a promising avenue for end-to-end learning in the field of log anomaly detection, offering notable advantages in performance and generalization across multiple datasets. In line with our commitment to the research community, we will make our scripts publicly available following the acceptance of this paper.
 
+## Results
+| **Method** | **HDFS** | **Hadoop** | **BGL** | **Thunderbird** | **Spirit** | **Liberty** |
+|------------|---------:|-----------:|--------:|----------------:|-----------:|------------:|
+| **OneLog** | **0.99** | **0.97**   | **0.99**| **0.99**        | **0.99**   | **0.99**    |
+| LogBERT    | 0.82     | N.A        | 0.91    | 0.97            | N.A        | N.A         |
+| NeuralLog  | 0.98     | N.A        | 0.98    | 0.96            | 0.97       | N.A         |
+| Logsy      | N.A      | N.A        | 0.65    | 0.99            | 0.99       | N.A         |
+| LogRobust  | 0.99     | 0.90       | 0.75    | 0.68            | 0.95       | N.A         |
+| LogAnomaly | 0.94     | N.A        | 0.88    | 0.84            | 0.95       | N.A         |
+| DeepLog    | 0.95     | N.A        | 0.86    | 0.93            | N.A        | N.A         |
+| SiaLog     | 0.99     | 0.94       | 0.99    | N.A             | N.A        | N.A         |
+| CNNLog     | 0.98     | 0.92       | 0.95    | N.A             | N.A        | N.A         |
+| Auto-LSTM  | N.A      | N.A        | 0.95    | 0.99            | N.A        | N.A         |
 ## Results Replication
-
 1. Clone the repository
     ```bash
     git clone https://github.com/M3SOulu/OneLogReplicationPackage.git

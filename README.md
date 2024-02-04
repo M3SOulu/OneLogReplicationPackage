@@ -1,7 +1,17 @@
-# OneLogReplicationPackage
+# OneLog: Towards End-to-End Software Log Anomaly Detection
 
-This is a replication package for "OneLog: Towards End-to-end Software Log Anomaly Detection".
-To replicated the results follow the steps below:
+## Abstract
+
+With the rapid expansion of online services, IoT devices, and DevOps-oriented software development practices, the need for efficient software log anomaly detection has grown significantly. Traditional approaches to this challenge typically rely on a four-staged architecture, encompassing a Preprocessor, Parser, Vectorizer, and Classifier. This paper introduces **OneLog**, a novel method that employs a single Deep Neural Network (DNN) to streamline the process, replacing the need for multiple distinct components.
+
+**OneLog** leverages the power of Convolutional Neural Networks (CNN) at the character level, incorporating digits, numbers, and punctuation—elements often omitted in previous studies—alongside the main body of natural language text. Our evaluation of this approach spans six message- and sequence-based datasets: HDFS, Hadoop, BGL, Thunderbird, Spirit, and Liberty, exploring its application in single-, multi-, and cross-project setups.
+
+Our findings reveal that **OneLog** not only achieves state-of-the-art performance across our datasets but also demonstrates an impressive capacity to generalize between datasets when trained on multi-project data. This feature is particularly advantageous in scenarios where individual projects may suffer from limited training data. Additionally, our experiments indicate the feasibility of cross-project anomaly detection, with successful trials involving a single project pair (Liberty and Spirit). Further analysis of **OneLog**'s internal mechanisms uncovers its multifaceted approach to anomaly detection and its ability to autonomously learn parsing rules that have been manually validated for log messages.
+
+We conclude that character-based CNNs represent a promising avenue for end-to-end learning in the field of log anomaly detection, offering notable advantages in performance and generalization across multiple datasets. In line with our commitment to the research community, we will make our scripts publicly available following the acceptance of this paper.
+
+## Results Replication
+
 1. Clone the repository
     ```bash
     git clone https://github.com/M3SOulu/OneLogReplicationPackage.git
@@ -18,3 +28,8 @@ To replicated the results follow the steps below:
     ```bash
     python trainer.py fit --config configs/{config}.yaml
     ```
+
+## Cite this work
+```bibtex
+filled uppon publish
+```
